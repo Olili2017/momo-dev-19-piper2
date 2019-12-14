@@ -1,11 +1,22 @@
 package com.piper2.momo.database.models;
 
+import javax.persistence.*;
 import java.util.Date;
 
-public class Transaction {
-    private int id, user;
+@Entity
+@Table(name = "tbl_transactions")
+public class Transaction extends AuditModel {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
+
+    private int user;
     private float amount;
     private Date date;
+
+    public Transaction() {
+    }
 
     public int getId() {
         return id;

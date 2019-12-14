@@ -3,8 +3,8 @@ package com.piper2.momo.database.models;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "tbl_tudents")
-public class Student extends AuditModel {
+@Table(name = "tbl_agents")
+public class SchoolAgent extends AuditModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -12,8 +12,9 @@ public class Student extends AuditModel {
 
     private String telephone;
 
-    public Student() {
+    public SchoolAgent() {
     }
+
 
     public int getId() {
         return id;
