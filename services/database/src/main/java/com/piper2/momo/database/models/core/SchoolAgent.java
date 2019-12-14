@@ -1,4 +1,6 @@
-package com.piper2.momo.database.models;
+package com.piper2.momo.database.models.core;
+
+import com.piper2.momo.database.models.AuditModel;
 
 import javax.persistence.*;
 

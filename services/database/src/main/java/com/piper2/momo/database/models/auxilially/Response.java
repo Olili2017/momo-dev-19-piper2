@@ -1,4 +1,6 @@
-package com.piper2.momo.database.models;
+package com.piper2.momo.database.models.auxilially;
+
+import java.util.ArrayList;
 
 public class Response {
     private String message;
@@ -18,10 +20,10 @@ public class Response {
     }
 
     public Object getData() {
-        return data;
+        return data != null ? data : new ArrayList<>();
     }
 
     public void setData(Object data) {
-        this.data = data;
+        this.data = data != null ? data : new ArrayList<>();
     }
 }
