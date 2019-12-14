@@ -1,13 +1,12 @@
 package com.piper2.momo.database.resources;
 
+import com.piper2.momo.database.constacts.Transactions;
 import com.piper2.momo.database.models.auxilially.Deposit;
+import com.piper2.momo.database.models.auxilially.Withdraw;
 import com.piper2.momo.database.models.core.Account;
 import com.piper2.momo.database.models.core.Transaction;
 import com.piper2.momo.database.repositories.AccountsRepository;
 import com.piper2.momo.database.repositories.TransactionRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.Arrays;
 
 public class TransactionController {
 
@@ -25,6 +24,10 @@ public class TransactionController {
 
     Deposit deposit(float amount, long from, long to) throws Exception {
 
+        if (amount < Transactions.DEPOSIT_THRESHOLD){
+            throw new Exception("Deposit amount must be more than " + Transactions.DEPOSIT_THRESHOLD);
+        }
+
         Account accountReceiving, accountGiving;
 
         if (!accountsRepository.findByAccountNumber(to).isPresent()){
@@ -38,10 +41,9 @@ public class TransactionController {
         accountGiving = accountsRepository.findByAccountNumber(from).get();
         accountReceiving = accountsRepository.findByAccountNumber(to).get();
 
-        withdraw(accountGiving.getAccountNumber(),amount);
+        transferMoney(amount, accountGiving.getAccountNumber(), accountReceiving.getAccountNumber());
 
         accountReceiving.setBalance(accountReceiving.getBalance() + amount);
-//        accountGiving.setBalance(accountGiving.getBalance() - amount);
 
         accountsRepository.save(accountReceiving);
         transactionRepository.save(new Transaction(from,to,amount));
@@ -49,7 +51,11 @@ public class TransactionController {
         return new Deposit(amount, to, accountGiving.getBalance());
     }
 
-    private boolean withdraw(long from, float amount) throws Exception{
+    private void transferMoney(float amount, long from, long to) throws Exception {
+        if (amount < Transactions.TRANSFER_THRESHOLD){
+            throw new Exception("Transfer amount must be more than " + Transactions.TRANSFER_THRESHOLD);
+        }
+
         if (!accountsRepository.findByAccountNumber(from).isPresent()){
             throw new Exception("Withdraw account is unknown");
         }
@@ -59,9 +65,29 @@ public class TransactionController {
             throw new Exception("Insufficient balance");
         } else {
             account.setBalance(account.getBalance() - amount);
-            accountsRepository.save(account);
+            Account newAcc = accountsRepository.save(account);
+            transactionRepository.save(new Transaction(from,to,amount));
+        }
+    }
+
+    Withdraw withdraw(long from, float amount) throws Exception{
+        if (amount < Transactions.WITHDRAW_THRESHOLD){
+            throw new Exception("Withdraw amount must be more than " + Transactions.WITHDRAW_THRESHOLD);
+        }
+
+        if (!accountsRepository.findByAccountNumber(from).isPresent()){
+            throw new Exception("Withdraw account is unknown");
+        }
+        Account account = accountsRepository.findByAccountNumber(from).get();
+
+        if (account.getBalance() < amount){
+            throw new Exception("Insufficient balance");
+        } else {
+            account.setBalance(account.getBalance() - amount);
+            Account newAcc = accountsRepository.save(account);
             transactionRepository.save(new Transaction(from,0,amount));
-            return true;
+
+            return new Withdraw(from, amount, newAcc.getBalance());
         }
     }
 }

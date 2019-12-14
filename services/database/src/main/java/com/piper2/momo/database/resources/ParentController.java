@@ -17,16 +17,16 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/momo/parent")
 public class ParentController {
 
-    final
+    private final
     ParentRepository parentRepository;
 
-    final
+    private final
     StudentRepository studentRepository;
 
-    final
+    private final
     AccountsRepository accountsRepository;
 
-    final
+    private final
     TransactionRepository transactionRepository;
 
     public ParentController(ParentRepository parentRepository, StudentRepository studentRepository, AccountsRepository accountsRepository, TransactionRepository transactionRepository) {
