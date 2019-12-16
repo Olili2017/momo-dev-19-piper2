@@ -16,6 +16,7 @@ public class Transaction extends AuditModel {
     private long fromAccount;
     private long toAccount;
     private float amount;
+    private int referenceId;
 
     public Transaction() {
     }
@@ -56,5 +57,13 @@ public class Transaction extends AuditModel {
 
     public void setToAccount(long toAccount) {
         this.toAccount = toAccount;
+    }
+
+    public int getReferenceId() {
+        return referenceId;
+    }
+
+    public void setReferenceId(int referenceId) {
+        this.referenceId = referenceId;
     }
 }
