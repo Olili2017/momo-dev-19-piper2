@@ -1,0 +1,20 @@
+{
+    "name": "piper2-momo-2019-digi-bursar-gateway",
+    "version": "1.0.0",
+    "description": "My MTN momo 2019 competition project for piper2",
+    "author": "Daniel Olili <olilidaniel48@gmail.com>",
+    "license": "MIT",
+    "main": "app.js",
+    "scripts": {
+        "start": "nodemon app.js"
+    },
+    "keywords": [
+        "nodejs",
+        "bootstrap",
+        "express"
+    ],
+    "dependencies": {
+        "axios": "^0.19.0",
+        "express": "^4.17.1"
+    }
+}
