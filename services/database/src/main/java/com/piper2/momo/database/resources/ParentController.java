@@ -95,9 +95,10 @@ public class ParentController {
     public Response depositToParentAccount (@RequestBody final Deposit deposit){
         try {
 
-            return new Response("OK",
-                    new TransactionController(accountsRepository, transactionRepository)
-                            .deposit(deposit.getAmount(),0, deposit.getTo()));
+            return new TransactionController(accountsRepository, transactionRepository).depositToParent(deposit.getAmount(), deposit.getTo());
+//            new Response("OK",
+//                    new TransactionController(accountsRepository, transactionRepository)
+//                            .deposit(deposit.getAmount(),0, deposit.getTo()));
         }catch (Exception ex) {
             return new Response("Error: "+ ex.getMessage(), null);
         }
