@@ -16,7 +16,17 @@ public class ParentController {
     @PostMapping("/add")
     public Response createParent(@RequestBody final StudentParent parent){
 
-        return new Response("OK", parent);
+    @PatchMapping("/account/deposit")
+    public Response depositToParentAccount (@RequestBody final Deposit deposit){
+        try {
+
+            return new TransactionController(accountsRepository, transactionRepository).depositToParent(deposit.getAmount(), deposit.getTo());
+//            new Response("OK",
+//                    new TransactionController(accountsRepository, transactionRepository)
+//                            .deposit(deposit.getAmount(),0, deposit.getTo()));
+        }catch (Exception ex) {
+            return new Response("Error: "+ ex.getMessage(), null);
+        }
     }
 
     @GetMapping("/{id}")
