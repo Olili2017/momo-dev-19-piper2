@@ -1,6 +1,6 @@
 package com.piper2.momo.android.digitalbursar;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import static org.junit.Assert.*;
 
