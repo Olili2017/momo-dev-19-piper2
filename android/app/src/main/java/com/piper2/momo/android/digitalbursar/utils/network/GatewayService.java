@@ -1,19 +1,19 @@
 package com.piper2.momo.android.digitalbursar.utils.network;
-//
-//import android.content.Context;
-//import com.piper2.momo.android.digitalbursar.models.User;
-//
-//import org.json.JSONObject;
-//
-//import retrofit2.Call;
-//import retrofit2.Retrofit;
-//import retrofit2.converter.gson.GsonConverterFactory;
+
+import android.content.Context;
+import com.piper2.momo.android.digitalbursar.models.User;
+
+import org.json.JSONObject;
+
+import retrofit2.Call;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class GatewayService implements NetworkConnection {
 
-//    private String endpoint;
-//    private JSONObject response;
-//    private Retrofit retrofit;//, retrofitLocationInstant;
+    private String endpoint;
+    private JSONObject response;
+    private Retrofit retrofit;//, retrofitLocationInstant;
 
     private static volatile NetworkConnection networkConnection;
     private static GatewayService dbService, dbServiceLoc;
@@ -23,33 +23,33 @@ public class GatewayService implements NetworkConnection {
     /**
      * GatewayService Constructor
      */
-//    public GatewayService() {
-//        retrofit = new Retrofit.Builder()
-//                .baseUrl(NetworkConnection.BASE_URL)
-//                .addConverterFactory(GsonConverterFactory.create())
-//                .build();
-//    }
-//
-//    //    start class functions
-//    public static synchronized GatewayService getInstance(){
-//        if (dbService == null)
-//            dbService = new GatewayService();
-//
-//        return dbService;
-//    }
-//
-//    public NetworkConnection getApi(){
-//        return retrofit.create(NetworkConnection.class);
-//    }
-//
-//    public static boolean canBeReached(Context context) {
-//        return ConnectionManager.getInstance(context).hasInternetConnection();
-//    }
-//
-//    @Override
-//    public Call<User> getUser(int customerId) {
-//        return null;
-//    }
+    public GatewayService() {
+        retrofit = new Retrofit.Builder()
+                .baseUrl(NetworkConnection.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+    }
+
+    //    start class functions
+    public static synchronized GatewayService getInstance(){
+        if (dbService == null)
+            dbService = new GatewayService();
+
+        return dbService;
+    }
+
+    public NetworkConnection getApi(){
+        return retrofit.create(NetworkConnection.class);
+    }
+
+    public static boolean canBeReached(Context context) {
+        return ConnectionManager.getInstance(context).hasInternetConnection();
+    }
+
+    @Override
+    public Call<User> getUser(int customerId) {
+        return null;
+    }
 
 //    start properties
 

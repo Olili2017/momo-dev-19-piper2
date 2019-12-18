@@ -13,10 +13,10 @@ import com.piper2.momo.android.digitalbursar.tools.ConfirmPasswordbottomSheet;
 import com.piper2.momo.android.digitalbursar.utils.network.GatewayService;
 
 import org.json.JSONObject;
-//
-//import retrofit2.Call;
-//import retrofit2.Callback;
-//import retrofit2.Response;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -68,22 +68,22 @@ public class MainActivity extends AppCompatActivity {
                 confirmPasswordbottomSheet.getTv_whats_happening().setText("Verifying your pin");
 //                TODO: validateUserWithDbService(password);
 
-//                if(GatewayService.canBeReached(MainActivity.this)) {
-//                        GatewayService.getInstance().getUser(46746).enqueue(new Callback<User>() {
-//                            @Override
-//                            public void onResponse(Call<User> call, Response<User> response) {
-//                                Log.d("networks_log", response.body().toString());
-//                                Toast.makeText(MainActivity.this,"server has response", Toast.LENGTH_SHORT).show();
-//                            }
-//
-//                            @Override
-//                            public void onFailure(Call<User> call, Throwable t) {
-//                                Toast.makeText(MainActivity.this,"server not reached", Toast.LENGTH_SHORT).show();
-//                            }
-//                        });
-//                    }else{
-//                        Toast.makeText(MainActivity.this,"no internet connection.", Toast.LENGTH_SHORT).show();
-//                    }
+                if(GatewayService.canBeReached(MainActivity.this)) {
+                    Call<User> getUser = GatewayService.getInstance().getApi().getUser(435545);
+                    getUser.enqueue(new Callback<User>() {
+                        @Override
+                        public void onResponse(Call<User> call, Response<User> response) {
+                            Toast.makeText(MainActivity.this,"done feetching", Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onFailure(Call<User> call, Throwable t) {
+                            Log.d("fail",call.toString());
+                        }
+                    });
+                    }else{
+                        Toast.makeText(MainActivity.this,"no internet connection.", Toast.LENGTH_SHORT).show();
+                    }
 
             }
         });
