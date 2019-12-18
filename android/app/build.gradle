@@ -12,11 +12,51 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
-        release {
-            minifyEnabled false
+        debug {
+            applicationIdSuffix ".debug"
+            debuggable true
+        }
+        staging {
+            initWith debug
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    flavorDimensions "version"
+    productFlavors {
+        student {
+            dimension "version"
+            applicationId "com.piper2.momo.digibursar"
+            applicationIdSuffix ".student"
+            versionNameSuffix "-student"
+
+        }
+
+        agent {
+            dimension "version"
+            applicationId "com.piper2.momo.digibursar"
+            applicationIdSuffix ".agent"
+            versionNameSuffix "-agent"
+        }
+
+        parent {
+            dimension "version"
+            applicationId "com.piper2.momo.digibursar"
+            applicationIdSuffix ".parent"
+            versionNameSuffix "-parent"
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+repositories {
+    mavenCentral()
+    google()
 }
 
 dependencies {
@@ -26,4 +66,17 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+
+    // card view
+    implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+
+//    Glide
+    implementation 'com.github.bumptech.glide:glide:4.10.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.10.0'
+
+//    retrofit http lib
+    implementation 'com.squareup.retrofit2:retrofit:2.7.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.7.0'
 }

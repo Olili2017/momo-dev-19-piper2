@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Digital bursar</string>
+    <string name="paddingDefault">8dp</string>
+    <string name="withdraw_money">Withdraw money</string>
+    <string name="view_statement">View statement</string>
+    <string name="hello">Hello!</string>
+    <string name="ugx">UGX:</string>
+    <string name="cancel">Cancel</string>
+    <string name="password">Password</string>
+    <string name="please_enter_your_password_before_you_can_proceed">Please enter your password before you can proceed</string>
+    <string name="please_wait_while_we_verify_your_password">please wait while we verify your account</string>
+    <string name="cares_about_your_security">cares about your security</string>
 </resources>
