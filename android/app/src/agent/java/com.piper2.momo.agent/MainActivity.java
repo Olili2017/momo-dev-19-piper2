@@ -1,8 +1,11 @@
-package com.piper2.momo.android.digitalbursar;
+package com.piper2.momo.agent;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.piper2.momo.android.digitalbursar.R;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override

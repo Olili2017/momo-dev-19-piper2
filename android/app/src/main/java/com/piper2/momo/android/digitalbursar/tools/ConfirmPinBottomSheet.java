@@ -18,7 +18,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.piper2.momo.android.digitalbursar.R;
 
-public class ConfirmPasswordbottomSheet extends BottomSheetDialogFragment {
+public class ConfirmPinBottomSheet extends BottomSheetDialogFragment {
 
     private OnSubmitListener onSubmitListener;
     private OnCancelListener onCancelListener;
@@ -146,27 +146,27 @@ public class ConfirmPasswordbottomSheet extends BottomSheetDialogFragment {
         });
     }
 
-    public ConfirmPasswordbottomSheet setOnCancelListener(OnCancelListener onCancelListener) {
+    public ConfirmPinBottomSheet setOnCancelListener(OnCancelListener onCancelListener) {
         this.onCancelListener = onCancelListener;
         return this;
     }
 
-    public ConfirmPasswordbottomSheet setOnSubmitListener(OnSubmitListener onSubmitListener) {
+    public ConfirmPinBottomSheet setOnSubmitListener(OnSubmitListener onSubmitListener) {
         this.onSubmitListener = onSubmitListener;
         return this;
     }
 
-    public ConfirmPasswordbottomSheet setOnPasswordConfirmedListener(OnPasswordConfirmedListener onPasswordConfirmedListener) {
+    public ConfirmPinBottomSheet setOnPasswordConfirmedListener(OnPasswordConfirmedListener onPasswordConfirmedListener) {
         this.onPasswordConfirmedListener = onPasswordConfirmedListener;
         return this;
     }
 
-    public ConfirmPasswordbottomSheet setOnConfirmingPasswordListener(OnConfirmingPasswordListener onConfirmingPasswordListener) {
+    public ConfirmPinBottomSheet setOnConfirmingPasswordListener(OnConfirmingPasswordListener onConfirmingPasswordListener) {
         this.onConfirmingPasswordListener = onConfirmingPasswordListener;
         return this;
     }
 
-    public ConfirmPasswordbottomSheet setOnConfirmingPasswordFailureListener(OnConfirmingPasswordFailureListener onConfirmingPasswordFailedListener) {
+    public ConfirmPinBottomSheet setOnConfirmingPasswordFailureListener(OnConfirmingPasswordFailureListener onConfirmingPasswordFailedListener) {
         this.onConfirmingPasswordFailureListener = onConfirmingPasswordFailedListener;
         return this;
     }

@@ -12,15 +12,42 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
-        release {
-            minifyEnabled false
+        debug {
+            applicationIdSuffix ".debug"
+            debuggable true
+        }
+        staging {
+            initWith debug
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
-//        debug {
-//            applicationIdSuffix ".debug"
-//            debuggable true
-//        }
     }
+
+    flavorDimensions "version"
+    productFlavors {
+        student {
+            dimension "version"
+            applicationId "com.piper2.momo.digibursar"
+            applicationIdSuffix ".student"
+            versionNameSuffix "-student"
+
+        }
+
+        agent {
+            dimension "version"
+            applicationId "com.piper2.momo.digibursar"
+            applicationIdSuffix ".agent"
+            versionNameSuffix "-agent"
+        }
+
+        parent {
+            dimension "version"
+            applicationId "com.piper2.momo.digibursar"
+            applicationIdSuffix ".parent"
+            versionNameSuffix "-parent"
+        }
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8

@@ -10,5 +10,5 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center_horizontal"
-        android:text="Main here" />
+        android:text="Agent here" />
 </LinearLayout>
