@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.piper2.momo.android.digitalbursar">
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-    <uses-feature android:name="android.hardware.location.network" android:required="false"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
+    <uses-feature
+        android:name="android.hardware.location.network"
+        android:required="false" />
 
     <application
         android:allowBackup="true"
@@ -14,6 +18,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".Transactions"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -10,4 +10,14 @@
     <string name="please_enter_your_password_before_you_can_proceed">Please enter your password before you can proceed</string>
     <string name="please_wait_while_we_verify_your_password">please wait while we verify your account</string>
     <string name="cares_about_your_security">cares about your security</string>
+    <string name="balance">My balance</string>
+    <string name="balance_placeholder">$5674</string>
+    <string name="student">Student</string>
+    <string name="welcome">Welcome</string>
+    <string name="last_transaction">Last transaction</string>
+    <string name="last_transaction_placeholder">$20</string>
+    <string name="transaction_date_placeholder">14 Dec 2019 - 22:23</string>
+    <string name="enter_amount">Enter amount you wish to withdraw</string>
+    <string name="enter_amount_you_wish_to_request">Enter amount you wish to request</string>
+    <string name="transactions">Transactions</string>
 </resources>
