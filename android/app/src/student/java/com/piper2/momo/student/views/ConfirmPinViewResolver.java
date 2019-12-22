@@ -1,4 +1,4 @@
-package com.piper2.momo.android.digitalbursar.views;
+package com.piper2.momo.student.views;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;

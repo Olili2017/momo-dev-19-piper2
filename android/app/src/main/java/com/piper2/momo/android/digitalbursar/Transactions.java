@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.piper2.momo.android.digitalbursar.tools.RotateText;
-import com.piper2.momo.student.MainActivity;
 
 public class Transactions extends AppCompatActivity {
 

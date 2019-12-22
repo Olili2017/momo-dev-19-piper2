@@ -6,4 +6,7 @@
     <color name="textPrimary">#222</color>
     <color name="white">#FFF</color>
     <color name="colorBlue">#006C92</color>
+    <color name="textWhiteFaint">#66eaeaea</color>
+    <color name="textBlueFaint">#99006C92</color>
+    <color name="textPrimaryFaint">#99222222</color>
 </resources>

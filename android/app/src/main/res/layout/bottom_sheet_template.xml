@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@null">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/fab_margin"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryDark"
+            android:contentDescription="@string/app_name"
+            android:orientation="vertical"
+            android:paddingTop="10dp"
+            android:paddingBottom="8dp"
+            android:scaleType="center">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:layout_marginTop="12dp"
+                android:contentDescription="@string/app_name"
+                android:gravity="center_horizontal"
+                android:scaleType="center"
+                android:text="@string/app_name"
+                android:id="@+id/title"
+                android:textColor="#ffffff"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:id="@+id/tag"
+                android:text="@string/cares_about_your_security"
+                android:textColor="@color/white" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/worker_view_parent"
+            android:orientation="vertical">
+<!--            to inflate any view here-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/worker_view"/>
+<!--            end inflated view-->
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/btn_continue"
+                android:text="Continue"
+                android:layout_margin="24dp"
+                android:background="@drawable/btn_yellow" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/form_pin_input"
+            android:visibility="gone"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/loading_linear_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="@dimen/fab_margin"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/tv_whats_happening"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/please_wait_while_we_verify_your_password" />
+
+                <ImageView
+                    android:id="@+id/pass_loading_spinner"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/spin_green" />
+
+                <TextView
+                    android:id="@+id/tv_actions_precision"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center_horizontal"
+                    android:text="0/2" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/password_form"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:padding="@dimen/fab_margin"
+                    android:text="@string/please_enter_your_password_before_you_can_proceed"
+                    android:textAlignment="center" />
+
+                <EditText
+                    android:id="@+id/confirm_password_at_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="4dp"
+                    android:background="@drawable/edit_text_confirm_border"
+                    android:hint="@string/password"
+                    android:inputType="textPassword"
+                    android:padding="10dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/fab_margin"
+                android:orientation="horizontal"
+                android:padding="@dimen/fab_margin"
+                android:paddingStart="@dimen/fab_margin"
+                android:paddingEnd="@dimen/fab_margin">
+
+                <Button
+                    android:id="@+id/btnCancel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:background="@drawable/btn_cancel"
+                    android:stateListAnimator="@null"
+                    android:text="@string/cancel"
+                    android:textColor="@color/textPrimary" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:id="@+id/btnSubmit"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:background="@drawable/btn_yellow"
+                    android:stateListAnimator="@null"
+                    android:text="Submit"
+                    android:textColor="@color/white" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_centerHorizontal="true"
+        android:elevation="2dp"
+        android:src="@mipmap/ic_launcher_round" />
+</RelativeLayout>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="60dp"
+android:layout_height="70dp"
+    android:id="@+id/cv_child_view_container">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="4dp">
+    <ImageButton
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:id="@+id/ib_child_image"
+        android:layout_gravity="center"
+        android:background="@drawable/circler_bg_user"
+        android:src="@drawable/ic_person_white_24dp" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_child_name"
+        android:text="@string/child_name"
+        android:layout_marginTop="4dp"
+        android:textAllCaps="false"
+        android:gravity="center_horizontal"
+        android:layout_gravity="center_horizontal"/>
+</LinearLayout>
+</androidx.cardview.widget.CardView>

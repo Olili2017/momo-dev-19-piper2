@@ -15,7 +15,7 @@ import com.piper2.momo.android.digitalbursar.Transactions;
 import com.piper2.momo.android.digitalbursar.models.User;
 import com.piper2.momo.android.digitalbursar.tools.RotateText;
 import com.piper2.momo.android.digitalbursar.utils.network.GatewayService;
-import com.piper2.momo.android.digitalbursar.views.ConfirmPinViewResolver;
+import com.piper2.momo.student.views.ConfirmPinViewResolver;
 
 import retrofit2.Call;
 import retrofit2.Callback;
