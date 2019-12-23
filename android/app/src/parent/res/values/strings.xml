@@ -2,4 +2,5 @@
 <resources>
     <string name="app_name">Digital parent</string>
     <string name="appname">Parent</string>
+    <string name="create_child_note">Your child will be given an account number. They will use it to get there money</string>
 </resources>

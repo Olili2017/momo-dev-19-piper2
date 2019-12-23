@@ -23,6 +23,7 @@ import com.piper2.momo.android.digitalbursar.tools.ClosableRelativeLayout;
 import com.piper2.momo.android.digitalbursar.tools.RotateText;
 import com.piper2.momo.parent.adpters.ChildViewAdapter;
 import com.piper2.momo.parent.models.Child;
+import com.piper2.momo.parent.views.SendMoneyToNewChildBottomSheet;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,13 +56,13 @@ public class SendMoneyActivity extends AppCompatActivity {
         recentChildren = (RecyclerView) findViewById(R.id.rv_children_wide_recycler);
 
         btnSendToNew.setOnClickListener(v -> {
-//            TODO: create new person
+            new SendMoneyToNewChildBottomSheet("Send money to;","").showNow(getSupportFragmentManager(),"btn_send_to_new");
         });
 
         List<Child> cc = new ArrayList<>();
 
-        cc.add(new Child("alex mukula"));
-        cc.add(new Child("Moses tumwebaze"));
+        cc.add(new Child("alex mukula",84598424));
+        cc.add(new Child("Moses tumwebaze",134589826));
 
         childViewAdapter = new ChildViewAdapter(this, cc, true);
         recentChildren.setHasFixedSize(true);

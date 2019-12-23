@@ -30,4 +30,8 @@
     <string name="enter_amount_here">Enter amount here</string>
     <string name="add_child">Add child</string>
     <string name="send_money">Send money</string>
+    <string name="oops">Oops!</string>
+    <string name="try_again">Try again</string>
+    <string name="enter_child_name_here">Enter child name here</string>
+    <string name="new_child">new child</string>
 </resources>

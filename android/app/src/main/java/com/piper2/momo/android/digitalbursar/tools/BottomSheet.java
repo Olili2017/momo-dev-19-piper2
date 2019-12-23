@@ -47,6 +47,8 @@ public class BottomSheet extends BottomSheetDialogFragment {
     private OnPasswordConfirmedListener onPasswordConfirmedListener;
     private OnConfirmingPasswordListener onConfirmingPasswordListener;
     private OnConfirmingPasswordFailureListener onConfirmingPasswordFailureListener;
+    private TextView titleView;
+    private TextView tagView;
 
     public int getWorkerViewLayout() {
         return workerViewLayout;
@@ -72,8 +74,8 @@ public class BottomSheet extends BottomSheetDialogFragment {
 
         template = LayoutInflater.from(getContext()).inflate(R.layout.bottom_sheet_template, null);
 
-        TextView titleView = template.findViewById(R.id.title);
-        TextView tagView = template.findViewById(R.id.tag);
+        titleView = template.findViewById(R.id.title);
+        tagView = template.findViewById(R.id.tag);
 
         titleView.setText(this.title);
         if (this.tag.length() > 0)
@@ -164,7 +166,8 @@ public class BottomSheet extends BottomSheetDialogFragment {
 
         setOnConfirmingPasswordFailureListener(message -> {
 
-
+            titleView.setText(Objects.requireNonNull(getContext()).getResources().getText(R.string.oops));
+            btnSubmit.setText(getContext().getResources().getText(R.string.try_again));
             currentStep.setText(message);
             currentStepActionTag.setText("");
 

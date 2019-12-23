@@ -1,4 +1,4 @@
-package com.piper2.momo.parent.tools;
+package com.piper2.momo.parent.views;
 
 import android.app.Dialog;
 import android.widget.TextView;
@@ -28,11 +28,6 @@ public class SendMoneyBottomSheet extends BottomSheet {
             singleReciverTag.setText(moneyRecipients.get(0).getName());
         }
 
-    }
-
-    @Override
-    public void setWorkerViewLayout(int workerViewLayout) {
-        super.setWorkerViewLayout(workerViewLayout);
     }
 
     public void setMoneyRecipients(Child... moneyRecipients) {

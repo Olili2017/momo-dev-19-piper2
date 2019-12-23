@@ -140,6 +140,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:id="@+id/tv_my_balance"
                                 android:text="@string/balance_placeholder"
                                 android:textStyle="bold"
                                 android:textSize="24sp"/>
@@ -154,14 +155,14 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:orientation="vertical"
-                                android:gravity="center"
-                                android:id="@+id/btn_send">
+                                android:gravity="center">
                                 <ImageButton
                                     android:layout_width="60dp"
                                     android:layout_height="60dp"
                                     android:src="@drawable/ic_cash_blue"
                                     android:background="@drawable/circle_bg_grandient"
                                     android:padding="12dp"
+                                    android:id="@+id/btn_send"
                                     android:layout_marginBottom="@dimen/paddingDefault"/>
                                 <TextView
                                     android:layout_width="match_parent"
@@ -176,11 +177,11 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:orientation="vertical"
-                                android:id="@+id/btn_requests"
                                 android:gravity="center">
                                 <ImageButton
                                     android:layout_width="60dp"
                                     android:layout_height="60dp"
+                                    android:id="@+id/btn_create_child"
                                     android:background="@drawable/circle_bg_grandient"
                                     android:src="@drawable/ic_add_child"
                                     android:padding="12dp"
@@ -250,6 +251,7 @@
                                     <ImageButton
                                         android:layout_width="40dp"
                                         android:layout_height="40dp"
+                                        android:id="@+id/btn_send_to_new"
                                         android:layout_gravity="center"
                                         android:background="@drawable/circle_bg_grandient"
                                         android:src="@drawable/ic_add_white_24dp"/>
@@ -319,6 +321,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:id="@+id/tv_last_transction_amount"
                                 android:text="@string/last_transaction_placeholder"
                                 android:textStyle="bold"
                                 android:textColor="@color/textPrimary"

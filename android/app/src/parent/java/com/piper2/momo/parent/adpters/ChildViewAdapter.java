@@ -1,13 +1,11 @@
 package com.piper2.momo.parent.adpters;
 
-import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -16,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.piper2.momo.android.digitalbursar.R;
 import com.piper2.momo.parent.models.Child;
-import com.piper2.momo.parent.tools.SendMoneyBottomSheet;
+import com.piper2.momo.parent.views.SendMoneyBottomSheet;
 
 import java.util.List;
 
@@ -65,9 +63,7 @@ public class ChildViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
 //        event listeners for the wide child list
         if (isWideView){
-//            childViewHolder.container.setOnClickListener(v -> {
-//                Toast.makeText(mContext, "cluck", Toast.LENGTH_SHORT).show();
-//            });
+            childViewHolder.childAccountNumber.setText(String.valueOf(child.getAccount()));
         }
 
         childViewHolder.container.setOnClickListener(v -> {
@@ -115,6 +111,7 @@ public class ChildViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     class ChildViewHolder extends RecyclerView.ViewHolder {
 
         private TextView childName;
+        private TextView childAccountNumber;
         private ImageButton childImage;
         private CardView container;
 
@@ -123,6 +120,7 @@ public class ChildViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
             childImage = (ImageButton) childView.findViewById(R.id.ib_child_image);
             childName = (TextView) childView.findViewById(R.id.tv_child_name);
+            childAccountNumber = (TextView) childView.findViewById(R.id.tv_child_number);
             container = (CardView) childView.findViewById(R.id.cv_child_view_container);
         }
     }
