@@ -9,6 +9,8 @@ import com.piper2.momo.database.models.core.Transaction;
 import com.piper2.momo.database.repositories.AccountsRepository;
 import com.piper2.momo.database.repositories.TransactionRepository;
 
+import java.util.Arrays;
+
 public class TransactionController {
 
     private AccountsRepository accountsRepository;
@@ -44,12 +46,12 @@ public class TransactionController {
 
         transferMoney(amount, accountGiving.getAccountNumber(), accountReceiving.getAccountNumber());
 
-        accountReceiving.setBalance(accountReceiving.getBalance() + amount);
+//        accountReceiving.setBalance(accountReceiving.getBalance() + amount);
+//
+//        accountsRepository.save(accountReceiving);
+//        transactionRepository.save(new Transaction(from,to,amount));
 
-        accountsRepository.save(accountReceiving);
-        transactionRepository.save(new Transaction(from,to,amount));
-
-        return new Deposit(amount, to, accountGiving.getBalance());
+        return new Deposit(amount, to, accountsRepository.findByAccountNumber(from).get().getBalance());
     }
 
     Response depositToParent(float amount, long parentAccount){
@@ -70,14 +72,20 @@ public class TransactionController {
         if (!accountsRepository.findByAccountNumber(from).isPresent()){
             throw new Exception("Withdraw account is unknown");
         }
+        
+        if (!accountsRepository.findByAccountNumber(to).isPresent()){
+            throw new Exception("Receiving account is unknown");
+        }
+
         Account givingAccount = accountsRepository.findByAccountNumber(from).get();
-//        Account recievingAccount = accountsRepository.findByAccountNumber(to).get();
+        Account receivingAccount = accountsRepository.findByAccountNumber(to).get();
 
         if (givingAccount.getBalance() < amount){
             throw new Exception("Insufficient balance");
         } else {
             givingAccount.setBalance(givingAccount.getBalance() - amount);
-            accountsRepository.save(givingAccount);
+            receivingAccount.setBalance(receivingAccount.getBalance() + amount);
+            accountsRepository.saveAll(Arrays.asList(givingAccount, receivingAccount));
             transactionRepository.save(new Transaction(from,to,amount));
         }
     }
