@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@null"
+    android:paddingTop="4dp"
+    android:paddingStart="4dp"
+    android:paddingEnd="4dp"
+    android:paddingBottom="0dp"
+    android:id="@+id/rl_activity_container">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/fab_margin"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryDark"
+            android:contentDescription="@string/app_name"
+            android:orientation="vertical"
+            android:paddingTop="10dp"
+            android:paddingBottom="8dp"
+            android:scaleType="center">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:layout_marginTop="12dp"
+                android:contentDescription="@string/app_name"
+                android:gravity="center_horizontal"
+                android:scaleType="center"
+                android:text="@string/send_money"
+                android:id="@+id/title"
+                android:textColor="#ffffff"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:id="@+id/tag"
+                android:text="Easy way to keep the young ones in shape"
+                android:textColor="@color/white" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/worker_view_parent"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/worker_view" >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical" >
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/colorPrimaryDark"
+                            android:orientation="vertical">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="3dp"
+                                android:layout_marginEnd="60dp"
+                                android:layout_marginStart="60dp"
+                                android:backgroundTint="@color/colorPrimary"
+                                android:background="@drawable/line"/>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/btn_send_to_new"
+                                android:padding="@dimen/paddingDefault"
+                                android:gravity="center_horizontal"
+                                android:background="@drawable/bg_stroke_dotted"
+                                android:layout_marginEnd="30dp"
+                                android:layout_marginStart="30dp"
+                                android:layout_marginTop="@dimen/paddingDefault"
+                                android:layout_marginBottom="@dimen/paddingDefault">
+                                <ImageButton
+                                    android:layout_width="40dp"
+                                    android:layout_height="40dp"
+                                    android:src="@drawable/ic_add_white_24dp"
+                                    android:background="@drawable/circle_bg_grandient"
+                                    android:layout_marginEnd="@dimen/paddingDefault" />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:text="@string/send_to_someone_new"
+                                    android:gravity="center"
+                                    android:paddingEnd="0dp"
+                                    android:textSize="20sp"
+                                    android:textColor="@color/colorBlue"
+                                    android:paddingStart="@dimen/paddingDefault"/>
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/paddingDefault"
+                            android:orientation="vertical">
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/recently_added"
+                                android:textSize="18sp"
+                                android:textColor="@color/textBlueFaint"
+                                />
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="@dimen/paddingDefault"
+                                android:layout_margin="@dimen/paddingDefault">
+                                <androidx.recyclerview.widget.RecyclerView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:id="@+id/rv_children_wide_recycler"/>
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                </RelativeLayout>
+
+            </LinearLayout>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/btn_continue"
+                android:textColor="@color/white"
+                android:textAllCaps="true"
+                android:textStyle="bold"
+                android:text="@string/confirm_selected"
+                android:layout_margin="24dp"
+                android:background="@drawable/btn_yellow" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_centerHorizontal="true"
+        android:elevation="2dp"
+        android:src="@mipmap/ic_launcher_round" />
+</RelativeLayout>
