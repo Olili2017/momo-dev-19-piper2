@@ -2,11 +2,14 @@ package com.piper2.momo.database.resources;
 
 import com.piper2.momo.database.constacts.Transactions;
 import com.piper2.momo.database.models.auxilially.Deposit;
+import com.piper2.momo.database.models.auxilially.Response;
 import com.piper2.momo.database.models.auxilially.Withdraw;
 import com.piper2.momo.database.models.core.Account;
 import com.piper2.momo.database.models.core.Transaction;
 import com.piper2.momo.database.repositories.AccountsRepository;
 import com.piper2.momo.database.repositories.TransactionRepository;
+
+import java.util.Arrays;
 
 public class TransactionController {
 
@@ -43,12 +46,22 @@ public class TransactionController {
 
         transferMoney(amount, accountGiving.getAccountNumber(), accountReceiving.getAccountNumber());
 
-        accountReceiving.setBalance(accountReceiving.getBalance() + amount);
+//        accountReceiving.setBalance(accountReceiving.getBalance() + amount);
+//
+//        accountsRepository.save(accountReceiving);
+//        transactionRepository.save(new Transaction(from,to,amount));
 
-        accountsRepository.save(accountReceiving);
-        transactionRepository.save(new Transaction(from,to,amount));
+        return new Deposit(amount, to, accountsRepository.findByAccountNumber(from).get().getBalance());
+    }
 
-        return new Deposit(amount, to, accountGiving.getBalance());
+    Response depositToParent(float amount, long parentAccount){
+
+        if(accountsRepository.findByAccountNumber(parentAccount).isPresent()){
+            Account pAcc = accountsRepository.findByAccountNumber(parentAccount).get();
+            pAcc.setBalance(pAcc.getBalance() + amount);
+            return new Response("Success!", new Deposit(amount, parentAccount, accountsRepository.save(pAcc).getBalance()));
+        }
+        return new Response("Unknown account", null);
     }
 
     private void transferMoney(float amount, long from, long to) throws Exception {
@@ -59,13 +72,20 @@ public class TransactionController {
         if (!accountsRepository.findByAccountNumber(from).isPresent()){
             throw new Exception("Withdraw account is unknown");
         }
-        Account account = accountsRepository.findByAccountNumber(from).get();
 
-        if (account.getBalance() < amount){
+        if (!accountsRepository.findByAccountNumber(to).isPresent()){
+            throw new Exception("Receiving account is unknown");
+        }
+
+        Account givingAccount = accountsRepository.findByAccountNumber(from).get();
+        Account receivingAccount = accountsRepository.findByAccountNumber(to).get();
+
+        if (givingAccount.getBalance() < amount){
             throw new Exception("Insufficient balance");
         } else {
-            account.setBalance(account.getBalance() - amount);
-            Account newAcc = accountsRepository.save(account);
+            givingAccount.setBalance(givingAccount.getBalance() - amount);
+            receivingAccount.setBalance(receivingAccount.getBalance() + amount);
+            accountsRepository.saveAll(Arrays.asList(givingAccount, receivingAccount));
             transactionRepository.save(new Transaction(from,to,amount));
         }
     }
