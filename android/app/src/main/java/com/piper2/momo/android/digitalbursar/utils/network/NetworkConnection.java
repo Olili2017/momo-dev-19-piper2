@@ -7,7 +7,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Path;
 public interface NetworkConnection {
 
-    String BASE_URL = "http://localhost:80/";
+    String BASE_URL = "http://192.168.42.130:5000";
 
     //Check if internet is present or not
     //Boolean canBeReached(Context context);

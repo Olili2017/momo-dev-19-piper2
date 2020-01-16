@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -148,6 +149,7 @@ public class BottomSheet extends BottomSheetDialogFragment {
                         @Override
                         public void onResponse(Call<User> call, Response<User> response) {
 //                            TODO: handle response from server
+                            Toast.makeText(getContext(),response.toString(),Toast.LENGTH_SHORT).show();
                         }
 
                         @Override
