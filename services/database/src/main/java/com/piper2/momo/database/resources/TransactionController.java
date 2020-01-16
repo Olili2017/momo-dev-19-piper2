@@ -72,7 +72,7 @@ public class TransactionController {
         if (!accountsRepository.findByAccountNumber(from).isPresent()){
             throw new Exception("Withdraw account is unknown");
         }
-
+        
         if (!accountsRepository.findByAccountNumber(to).isPresent()){
             throw new Exception("Receiving account is unknown");
         }

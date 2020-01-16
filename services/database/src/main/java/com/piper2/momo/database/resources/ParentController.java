@@ -94,7 +94,6 @@ public class ParentController {
     @PatchMapping("/account/deposit")
     public Response depositToParentAccount (@RequestBody final Deposit deposit){
         try {
-
             return new TransactionController(accountsRepository, transactionRepository).depositToParent(deposit.getAmount(), deposit.getTo());
 //            new Response("OK",
 //                    new TransactionController(accountsRepository, transactionRepository)
