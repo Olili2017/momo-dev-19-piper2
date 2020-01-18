@@ -124,7 +124,7 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginBottom="4dp"
-                    android:background="@drawable/edit_text_confirm_border"
+                    android:background="@drawable/bg_pill"
                     android:hint="@string/password"
                     android:inputType="textPassword"
                     android:padding="10dp" />

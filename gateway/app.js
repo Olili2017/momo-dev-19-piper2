@@ -13,4 +13,4 @@ app.use((req, res, next) => {
 
 routes.register(app)
 
-app.listen(port, console.log('\x1B[35m',`[piper2-momo-gateway] Listening on port ${port}`))
+app.listen(port, '192.168.42.130', console.log('\x1B[35m',`[piper2-momo-gateway] Listening on port ${port}`))

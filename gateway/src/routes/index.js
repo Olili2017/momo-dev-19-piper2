@@ -20,6 +20,18 @@ const register = (app) => {
     parentRoutes.register(app)
     studentRoutes.register(app)
 
+    app.post('/rest/user/verify', (req,res) => {
+        let {id = 0, pass = '4321' } = req.body
+
+        console.log(req.body)
+
+        if (id ===1 && pass === '1234'){
+            res.json({ verified : true})
+        } else {
+            res.json({verified : false})
+        }
+    })
+
     // agent : signup
     // agent : login
     // agent : withraw

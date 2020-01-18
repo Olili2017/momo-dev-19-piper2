@@ -3,8 +3,15 @@ package com.piper2.momo.android.digitalbursar.models;
 public class User {
     private String name;
     private int id;
+
+    public User(int id, String pass) {
+        this.id = id;
+        this.pass = pass;
+    }
+
     private String pass;
     private long acc;
+
 
     public String getName() {
         return name;

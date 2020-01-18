@@ -1,6 +1,9 @@
 package com.piper2.momo.android.digitalbursar.utils.network;
 
 import android.content.Context;
+
+import com.piper2.momo.android.digitalbursar.models.Piner;
+import com.piper2.momo.android.digitalbursar.models.SendMoneyDAO;
 import com.piper2.momo.android.digitalbursar.models.User;
 
 import org.json.JSONObject;
@@ -51,7 +54,17 @@ public class GatewayService implements NetworkConnection {
         return null;
     }
 
-//    start properties
+    @Override
+    public Call<Piner> verifyPin(User user) {
+        return null;
+    }
+
+    @Override
+    public Call<Object> sendMoney(SendMoneyDAO sendMoneyDAO) {
+        return null;
+    }
+
+    //    start properties
 
     /**
      * making the request

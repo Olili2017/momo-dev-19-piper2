@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.res.XmlResourceParser;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -21,8 +22,12 @@ import com.bumptech.glide.Glide;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.piper2.momo.android.digitalbursar.R;
+import com.piper2.momo.android.digitalbursar.models.Piner;
 import com.piper2.momo.android.digitalbursar.models.User;
 import com.piper2.momo.android.digitalbursar.utils.network.GatewayService;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.Objects;
 
@@ -41,11 +46,12 @@ public class BottomSheet extends BottomSheetDialogFragment {
     private ImageView loadingSpinner;
     private EditText etPassword;
     private TextView currentStep, currentStepActionTag;
+    String nextStepActionTag;
     private String title, tag;
 
     private OnSubmitListener onSubmitListener;
     private OnCancelListener onCancelListener;
-    private OnPasswordConfirmedListener onPasswordConfirmedListener;
+    protected OnPasswordConfirmedListener onPasswordConfirmedListener;
     private OnConfirmingPasswordListener onConfirmingPasswordListener;
     private OnConfirmingPasswordFailureListener onConfirmingPasswordFailureListener;
     private TextView titleView;
@@ -61,6 +67,14 @@ public class BottomSheet extends BottomSheetDialogFragment {
 
     public View getTemplate() {
         return template;
+    }
+
+    public void setNextStepActionTag(String nextStepActionTag) {
+        this.nextStepActionTag = nextStepActionTag;
+    }
+
+    public String getNextStepActionTag() {
+        return nextStepActionTag;
     }
 
     public BottomSheet(String title, String  tag){
@@ -144,26 +158,46 @@ public class BottomSheet extends BottomSheetDialogFragment {
             currentStep.setText("1/2");
             currentStepActionTag.setText("Verifying your pin");
                 if(GatewayService.canBeReached(getContext())) {
-                    Call<User> getUser = GatewayService.getInstance().getApi().getUser(435545);
-                    getUser.enqueue(new Callback<User>() {
-                        @Override
-                        public void onResponse(Call<User> call, Response<User> response) {
-//                            TODO: handle response from server
-                            Toast.makeText(getContext(),response.toString(),Toast.LENGTH_SHORT).show();
-                        }
-
-                        @Override
-                        public void onFailure(Call<User> call, Throwable t) {
-                            if (onConfirmingPasswordFailureListener  != null){
-                                onConfirmingPasswordFailureListener.onConfirmingPasswordFailed("Service temporarily unavailable. Please try again later");
-                            }
-                        }
-                    });
+//                    TODO: get user id from prefs
+                    Call<Piner> getUser = GatewayService.getInstance().getApi().verifyPin(new User(1,password));
+                    if (onPasswordConfirmedListener != null){
+                                    onPasswordConfirmedListener.onPasswordConfirmed();
+                                }
+//                    Call<User> getUser = GatewayService.getInstance().getApi().getUser(435545);
+//                    getUser.enqueue(new Callback<Piner>() {
+//                        @Override
+//                        public void onResponse(Call<Piner> call, Response<Piner> response) {
+////                            TODO: handle response from server
+//                            assert response.body() != null;
+//                            Log.d("verify",response.body().isVerified() ? "yes" : "not yet");
+//                            if (response.body().isVerified()){
+//                                if (onPasswordConfirmedListener != null){
+//                                    onPasswordConfirmedListener.onPasswordConfirmed();
+//                                }
+//                            } else {
+//                                if (onConfirmingPasswordFailureListener != null) {
+//                                    onConfirmingPasswordFailureListener.onConfirmingPasswordFailed("Incorrect pin entry");
+//                                }
+//                            }
+//                        }
+//
+//                        @Override
+//                        public void onFailure(Call<Piner> call, Throwable t) {
+//                            if (onConfirmingPasswordFailureListener  != null){
+//                                onConfirmingPasswordFailureListener.onConfirmingPasswordFailed("Service temporarily unavailable. Please try again later");
+//                            }
+//                        }
+//                    });
                 }else{
                     if (onConfirmingPasswordFailureListener  != null){
                         onConfirmingPasswordFailureListener.onConfirmingPasswordFailed("No internet! check your connection and try again.");
                     }
                 }
+        });
+
+        setOnPasswordConfirmedListener(() -> {
+            currentStep.setText("2/2");
+            currentStepActionTag.setText(getNextStepActionTag());
         });
 
         setOnConfirmingPasswordFailureListener(message -> {
@@ -228,19 +262,23 @@ public class BottomSheet extends BottomSheetDialogFragment {
         this.onCancelListener = onCancelListener;
     }
 
-    public void setOnSubmitListener(OnSubmitListener onSubmitListener) {
+    private void setOnSubmitListener(OnSubmitListener onSubmitListener) {
         this.onSubmitListener = onSubmitListener;
     }
 
-    public void setOnPasswordConfirmedListener(OnPasswordConfirmedListener onPasswordConfirmedListener) {
+    private void setOnPasswordConfirmedListener() {
+        setOnPasswordConfirmedListener();
+    }
+
+    private void setOnPasswordConfirmedListener(OnPasswordConfirmedListener onPasswordConfirmedListener) {
         this.onPasswordConfirmedListener = onPasswordConfirmedListener;
     }
 
-    public void setOnConfirmingPasswordListener(OnConfirmingPasswordListener onConfirmingPasswordListener) {
+    private void setOnConfirmingPasswordListener(OnConfirmingPasswordListener onConfirmingPasswordListener) {
         this.onConfirmingPasswordListener = onConfirmingPasswordListener;
     }
 
-    public void setOnConfirmingPasswordFailureListener(OnConfirmingPasswordFailureListener onConfirmingPasswordFailedListener) {
+    private void setOnConfirmingPasswordFailureListener(OnConfirmingPasswordFailureListener onConfirmingPasswordFailedListener) {
         this.onConfirmingPasswordFailureListener = onConfirmingPasswordFailedListener;
     }
 
