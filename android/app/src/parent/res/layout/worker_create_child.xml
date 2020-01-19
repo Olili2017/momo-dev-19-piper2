@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/paddingDefault">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/create_child_note"
+            android:gravity="center_horizontal"
+            android:textStyle="bold"
+            android:textColor="@color/textBlueFaint"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/et_new_child_name"
+            android:inputType="text"
+            android:background="@drawable/bg_pill"
+            android:hint="@string/enter_child_name_here"
+            android:padding="@dimen/paddingDefault"
+            android:layout_marginTop="@dimen/paddingDefault"
+            android:layout_marginBottom="@dimen/paddingDefault"
+            android:layout_marginStart="45dp"
+            android:layout_marginEnd="45dp"/>
+    </LinearLayout>
+</LinearLayout>
