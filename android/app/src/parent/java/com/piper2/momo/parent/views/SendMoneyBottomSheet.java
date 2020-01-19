@@ -2,20 +2,18 @@ package com.piper2.momo.parent.views;
 
 import android.app.Dialog;
 import android.util.Log;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.piper2.momo.android.digitalbursar.R;
 import com.piper2.momo.android.digitalbursar.models.SendMoneyDAO;
 import com.piper2.momo.android.digitalbursar.tools.BottomSheet;
 import com.piper2.momo.android.digitalbursar.utils.network.GatewayService;
+import com.piper2.momo.parent.actions.SendMoney;
 import com.piper2.momo.parent.models.Child;
 
 import java.util.Arrays;
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class SendMoneyBottomSheet extends BottomSheet {
 
@@ -43,21 +41,19 @@ public class SendMoneyBottomSheet extends BottomSheet {
         this.moneyRecipients = Arrays.asList(moneyRecipients);
     }
 
-    public boolean sendMoney(){
-        Call<Object> sendMoneyRequest = GatewayService.getInstance().getApi().sendMoney(new SendMoneyDAO("0772649119",5000.0F));
+    @Override
+    public void doFinalThing() {
+//        FIXME: add iteration for more students at once
 
-        sendMoneyRequest.enqueue(new Callback<Object>() {
-            @Override
-            public void onResponse(Call<Object> call, Response<Object> response) {
-//                TODO: get server response
-            }
-
-            @Override
-            public void onFailure(Call<Object> call, Throwable t) {
-
-            }
-        });
-
-        return false;
+        EditText sendAmountEditText = getTemplate().findViewById(R.id.et_amount_to_send);
+        new SendMoney(Float.parseFloat(sendAmountEditText.getText().toString()))
+                .setSender("0772649119")
+                .setReciever(moneyRecipients.get(0).getAccount())
+                .setOnSendFailed(message -> {
+                    if (onConfirmingPasswordFailureListener != null){
+                        onConfirmingPasswordFailureListener.onConfirmingPasswordFailed("Sending money operation failed. please try again!");
+                    }
+                })
+                .execute();
     }
 }

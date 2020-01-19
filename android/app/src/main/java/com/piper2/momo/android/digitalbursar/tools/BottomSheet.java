@@ -25,6 +25,7 @@ import com.piper2.momo.android.digitalbursar.R;
 import com.piper2.momo.android.digitalbursar.models.Piner;
 import com.piper2.momo.android.digitalbursar.models.User;
 import com.piper2.momo.android.digitalbursar.utils.network.GatewayService;
+import com.piper2.momo.parent.actions.SendMoney;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -51,9 +52,9 @@ public class BottomSheet extends BottomSheetDialogFragment {
 
     private OnSubmitListener onSubmitListener;
     private OnCancelListener onCancelListener;
-    protected OnPasswordConfirmedListener onPasswordConfirmedListener;
+    private OnPasswordConfirmedListener onPasswordConfirmedListener;
     private OnConfirmingPasswordListener onConfirmingPasswordListener;
-    private OnConfirmingPasswordFailureListener onConfirmingPasswordFailureListener;
+    public OnConfirmingPasswordFailureListener onConfirmingPasswordFailureListener;
     private TextView titleView;
     private TextView tagView;
 
@@ -198,7 +199,10 @@ public class BottomSheet extends BottomSheetDialogFragment {
         setOnPasswordConfirmedListener(() -> {
             currentStep.setText("2/2");
             currentStepActionTag.setText(getNextStepActionTag());
+
+            doFinalThing();
         });
+
 
         setOnConfirmingPasswordFailureListener(message -> {
 
@@ -258,6 +262,10 @@ public class BottomSheet extends BottomSheetDialogFragment {
 
     }
 
+    public void doFinalThing(){
+//        intentionally left empty for override usage.. // please don't remove.
+    }
+
     public void setOnCancelListener(OnCancelListener onCancelListener) {
         this.onCancelListener = onCancelListener;
     }
@@ -266,11 +274,7 @@ public class BottomSheet extends BottomSheetDialogFragment {
         this.onSubmitListener = onSubmitListener;
     }
 
-    private void setOnPasswordConfirmedListener() {
-        setOnPasswordConfirmedListener();
-    }
-
-    private void setOnPasswordConfirmedListener(OnPasswordConfirmedListener onPasswordConfirmedListener) {
+    public void setOnPasswordConfirmedListener(OnPasswordConfirmedListener onPasswordConfirmedListener) {
         this.onPasswordConfirmedListener = onPasswordConfirmedListener;
     }
 
