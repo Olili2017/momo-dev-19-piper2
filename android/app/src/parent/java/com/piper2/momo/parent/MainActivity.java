@@ -17,7 +17,6 @@ import com.piper2.momo.android.digitalbursar.utils.numbers.ConvertToCurrency;
 import com.piper2.momo.parent.actions.GetChildren;
 import com.piper2.momo.parent.adpters.ChildViewAdapter;
 import com.piper2.momo.parent.constants.Hard;
-import com.piper2.momo.parent.models.Child;
 import com.piper2.momo.parent.views.AddNewChildBottomSheet;
 import com.piper2.momo.parent.views.SendMoneyToNewChildBottomSheet;
 

@@ -1,4 +1,4 @@
-package com.piper2.momo.parent.models;
+package com.piper2.momo.android.digitalbursar.models;
 
 public class ConfirmTransactionResponseDAO {
     private String message;

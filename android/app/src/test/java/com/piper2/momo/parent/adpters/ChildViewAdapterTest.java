@@ -2,9 +2,8 @@ package com.piper2.momo.parent.adpters;
 
 import android.content.Context;
 
-import com.piper2.momo.parent.models.Child;
+import com.piper2.momo.android.digitalbursar.models.Child;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 

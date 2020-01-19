@@ -2,16 +2,11 @@ package com.piper2.momo.parent.actions;
 
 import android.util.Log;
 
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import com.piper2.momo.android.digitalbursar.models.ConfirmSendMoneyDAO;
 import com.piper2.momo.android.digitalbursar.models.SendMoneyDAO;
 import com.piper2.momo.android.digitalbursar.utils.network.GatewayService;
-import com.piper2.momo.parent.models.ConfirmTransactionResponseDAO;
-import com.piper2.momo.parent.models.InitiateTransactionResponseDAO;
-
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.piper2.momo.android.digitalbursar.models.ConfirmTransactionResponseDAO;
+import com.piper2.momo.android.digitalbursar.models.InitiateTransactionResponseDAO;
 
 import retrofit2.Call;
 import retrofit2.Callback;

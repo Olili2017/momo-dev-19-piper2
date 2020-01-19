@@ -6,9 +6,9 @@ import com.piper2.momo.android.digitalbursar.models.ConfirmSendMoneyDAO;
 import com.piper2.momo.android.digitalbursar.models.Piner;
 import com.piper2.momo.android.digitalbursar.models.SendMoneyDAO;
 import com.piper2.momo.android.digitalbursar.models.User;
-import com.piper2.momo.parent.models.Child;
-import com.piper2.momo.parent.models.ConfirmTransactionResponseDAO;
-import com.piper2.momo.parent.models.InitiateTransactionResponseDAO;
+import com.piper2.momo.android.digitalbursar.models.Child;
+import com.piper2.momo.android.digitalbursar.models.ConfirmTransactionResponseDAO;
+import com.piper2.momo.android.digitalbursar.models.InitiateTransactionResponseDAO;
 
 import org.json.JSONObject;
 

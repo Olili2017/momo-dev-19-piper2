@@ -2,8 +2,6 @@ package com.piper2.momo.android.digitalbursar.tools;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
-import android.content.res.XmlResourceParser;
-import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +10,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -30,10 +27,6 @@ import com.piper2.momo.android.digitalbursar.R;
 import com.piper2.momo.android.digitalbursar.models.Piner;
 import com.piper2.momo.android.digitalbursar.models.User;
 import com.piper2.momo.android.digitalbursar.utils.network.GatewayService;
-import com.piper2.momo.parent.actions.SendMoney;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.Objects;
 

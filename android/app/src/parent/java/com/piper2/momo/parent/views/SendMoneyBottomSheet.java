@@ -6,12 +6,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.piper2.momo.android.digitalbursar.R;
-import com.piper2.momo.android.digitalbursar.models.SendMoneyDAO;
 import com.piper2.momo.android.digitalbursar.tools.BottomSheet;
-import com.piper2.momo.android.digitalbursar.utils.network.GatewayService;
 import com.piper2.momo.parent.actions.SendMoney;
 import com.piper2.momo.parent.constants.Hard;
-import com.piper2.momo.parent.models.Child;
+import com.piper2.momo.android.digitalbursar.models.Child;
 
 import java.util.Arrays;
 import java.util.List;

@@ -1,15 +1,8 @@
 package com.piper2.momo.parent;
 
-import android.animation.Animator;
-import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Point;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Display;
-import android.view.MotionEvent;
-import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
@@ -19,14 +12,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.piper2.momo.android.digitalbursar.R;
-import com.piper2.momo.android.digitalbursar.Transactions;
-import com.piper2.momo.android.digitalbursar.tools.ClosableRelativeLayout;
-import com.piper2.momo.android.digitalbursar.tools.RotateText;
-import com.piper2.momo.android.digitalbursar.utils.numbers.ConvertToCurrency;
 import com.piper2.momo.parent.actions.GetChildren;
 import com.piper2.momo.parent.adpters.ChildViewAdapter;
 import com.piper2.momo.parent.constants.Hard;
-import com.piper2.momo.parent.models.Child;
 import com.piper2.momo.parent.views.SendMoneyToNewChildBottomSheet;
 
 import java.util.ArrayList;

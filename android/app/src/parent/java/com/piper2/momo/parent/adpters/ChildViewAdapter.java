@@ -1,7 +1,6 @@
 package com.piper2.momo.parent.adpters;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +13,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.piper2.momo.android.digitalbursar.R;
-import com.piper2.momo.parent.models.Child;
+import com.piper2.momo.android.digitalbursar.models.Child;
 import com.piper2.momo.parent.views.SendMoneyBottomSheet;
 
 import java.util.List;

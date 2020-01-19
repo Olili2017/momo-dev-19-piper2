@@ -1,7 +1,7 @@
 package com.piper2.momo.parent.actions;
 
 import com.piper2.momo.android.digitalbursar.utils.network.GatewayService;
-import com.piper2.momo.parent.models.Child;
+import com.piper2.momo.android.digitalbursar.models.Child;
 
 import java.util.List;
 
