@@ -30,7 +30,7 @@ class Database {
     depositToParent(account, amount, success){
         databaseService.patch("/momo/parent/account/deposit/",{ amount : amount, to : account})
             .then(response => {
-                success(response)
+                success(response.data)
             }, err => {
                 error(err)
             })
@@ -54,6 +54,18 @@ class Database {
             .then(
                 parent => {
                     next(parent.data.data)
+                },
+                err => {
+                    error(err)
+                }
+            )
+    }
+
+    getChildren(parentPhone,next,error){
+        databaseService.get(`/momo/parent/${parentPhone}/children`)
+            .then(
+                children => {
+                    next(children.data.data)
                 },
                 err => {
                     error(err)

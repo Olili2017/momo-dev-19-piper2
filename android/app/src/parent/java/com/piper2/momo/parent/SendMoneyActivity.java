@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Point;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
@@ -21,7 +22,9 @@ import com.piper2.momo.android.digitalbursar.R;
 import com.piper2.momo.android.digitalbursar.Transactions;
 import com.piper2.momo.android.digitalbursar.tools.ClosableRelativeLayout;
 import com.piper2.momo.android.digitalbursar.tools.RotateText;
+import com.piper2.momo.parent.actions.GetChildren;
 import com.piper2.momo.parent.adpters.ChildViewAdapter;
+import com.piper2.momo.parent.constants.Hard;
 import com.piper2.momo.parent.models.Child;
 import com.piper2.momo.parent.views.SendMoneyToNewChildBottomSheet;
 
@@ -59,15 +62,28 @@ public class SendMoneyActivity extends AppCompatActivity {
             new SendMoneyToNewChildBottomSheet("Send money to;","").showNow(getSupportFragmentManager(),"btn_send_to_new");
         });
 
-        List<Child> cc = new ArrayList<>();
+        final List[] cc = new List[]{new ArrayList<>()};
 
-        cc.add(new Child("alex mukula",84598424));
-        cc.add(new Child("Moses tumwebaze",134589826));
+//        FIXME: change parent source on integration
+        new GetChildren(Hard.PARENT_PHONE)
+                .setOnChildrenListFetchCompleteLister((children) -> {
 
-        childViewAdapter = new ChildViewAdapter(this, cc, true);
-        recentChildren.setHasFixedSize(true);
-        recentChildren.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        recentChildren.setAdapter(childViewAdapter);
+                    cc[0] = children;
+                    childViewAdapter = new ChildViewAdapter(this, cc[0], true);
+                    recentChildren.setHasFixedSize(true);
+                    recentChildren.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+                    recentChildren.setAdapter(childViewAdapter);
+                })
+                .setOnChildrenListFetchFailedLister(() ->{
+
+
+                    childViewAdapter = new ChildViewAdapter(this, cc[0], true);
+                    recentChildren.setHasFixedSize(true);
+                    recentChildren.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+                    recentChildren.setAdapter(childViewAdapter);
+                })
+                .fetch();
+
     }
 
     @Override

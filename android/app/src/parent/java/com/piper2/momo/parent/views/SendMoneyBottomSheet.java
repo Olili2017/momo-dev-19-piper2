@@ -10,6 +10,7 @@ import com.piper2.momo.android.digitalbursar.models.SendMoneyDAO;
 import com.piper2.momo.android.digitalbursar.tools.BottomSheet;
 import com.piper2.momo.android.digitalbursar.utils.network.GatewayService;
 import com.piper2.momo.parent.actions.SendMoney;
+import com.piper2.momo.parent.constants.Hard;
 import com.piper2.momo.parent.models.Child;
 
 import java.util.Arrays;
@@ -44,14 +45,20 @@ public class SendMoneyBottomSheet extends BottomSheet {
     @Override
     public void doFinalThing() {
 //        FIXME: add iteration for more students at once
-
         EditText sendAmountEditText = getTemplate().findViewById(R.id.et_amount_to_send);
         new SendMoney(Float.parseFloat(sendAmountEditText.getText().toString()))
-                .setSender("0772649119")
-                .setReciever(moneyRecipients.get(0).getAccount())
+//        FIXME: change parent source on integration
+                .setSender(Hard.PARENT_PHONE)
+                .setReciever(moneyRecipients.get(0).getAccountNumber())
+                .setOnSendMoneyCompletedListener(data -> {
+                    Log.d("sendmoney","sent" + data.toString());
+                    if (onAllActionsCompletedListener != null){
+                        onAllActionsCompletedListener.onAllActionsCompleted();
+                    }
+                })
                 .setOnSendFailed(message -> {
                     if (onConfirmingPasswordFailureListener != null){
-                        onConfirmingPasswordFailureListener.onConfirmingPasswordFailed("Sending money operation failed. please try again!");
+                        onConfirmingPasswordFailureListener.onConfirmingPasswordFailed(message);
                     }
                 })
                 .execute();

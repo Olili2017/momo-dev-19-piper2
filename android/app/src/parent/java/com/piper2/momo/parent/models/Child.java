@@ -5,7 +5,7 @@ public class Child {
     private String name;
     private String firstName;
     private String image;
-    private long account;
+    private long accountNumber;
 
     public Child() {
     }
@@ -18,7 +18,7 @@ public class Child {
     public Child(String name, long acc) {
         this.name = name;
         this.firstName = name.split(" ")[0];
-        this.account = acc;
+        this.accountNumber = acc;
     }
 
     public String getName() {
@@ -45,11 +45,11 @@ public class Child {
         this.image = image;
     }
 
-    public long getAccount() {
-        return account;
+    public long getAccountNumber() {
+        return accountNumber;
     }
 
-    public void setAccount(long account) {
-        this.account = account;
+    public void setAccountNumber(long accountNumber) {
+        this.accountNumber = accountNumber;
     }
 }

@@ -6,8 +6,13 @@ import com.piper2.momo.android.digitalbursar.models.ConfirmSendMoneyDAO;
 import com.piper2.momo.android.digitalbursar.models.Piner;
 import com.piper2.momo.android.digitalbursar.models.SendMoneyDAO;
 import com.piper2.momo.android.digitalbursar.models.User;
+import com.piper2.momo.parent.models.Child;
+import com.piper2.momo.parent.models.ConfirmTransactionResponseDAO;
+import com.piper2.momo.parent.models.InitiateTransactionResponseDAO;
 
 import org.json.JSONObject;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Retrofit;
@@ -61,12 +66,17 @@ public class GatewayService implements NetworkConnection {
     }
 
     @Override
-    public Call<Object> sendMoney(SendMoneyDAO sendMoneyDAO) {
+    public Call<InitiateTransactionResponseDAO> sendMoney(SendMoneyDAO sendMoneyDAO) {
         return null;
     }
 
     @Override
-    public Call<Object> sendMoney(ConfirmSendMoneyDAO confirmSendMoneyDAO) {
+    public Call<ConfirmTransactionResponseDAO> sendMoney(ConfirmSendMoneyDAO confirmSendMoneyDAO) {
+        return null;
+    }
+
+    @Override
+    public Call<List<Child>> getChildren(String phone) {
         return null;
     }
 

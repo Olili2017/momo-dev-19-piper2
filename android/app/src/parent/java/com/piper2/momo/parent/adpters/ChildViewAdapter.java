@@ -64,7 +64,7 @@ public class ChildViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
 //        event listeners for the wide child list
         if (isWideView){
-            childViewHolder.childAccountNumber.setText(String.valueOf(child.getAccount()));
+            childViewHolder.childAccountNumber.setText(String.valueOf(child.getAccountNumber()));
         }
 
         childViewHolder.container.setOnClickListener(v -> {

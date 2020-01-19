@@ -20,19 +20,20 @@ const register = (app) => {
 
     // parent : confirm deposit done
     app.put("/parent/deposit/confirm/", (req, res) => {
+
         momoClient.confirmCollection(
             req.body.referenceId,
             response => {
                 switch(response.status){
                     case "SUCCESSFUL":
                         database.getParent(response.payer.partyId, parent => {
-                            console.log(`Saught is : ${response.payer.partyId}`, parent);
+                            //console.log(`Saught is : ${response.payer.partyId}`, parent);
 
                             if (parent.accountNumber !== undefined){
 
                                 // TODO: Change parent account balance before deposit to student
                                 database.depositToParent(parent.accountNumber, response.amount, (money) => {
-                                        console.log(money);
+                                        //console.log(money);
 
                                     database.depositToStudent(
                                         {
@@ -42,6 +43,7 @@ const register = (app) => {
                                         },
                                         depositResponse => {
                                             res.json(depositResponse)
+                                            console.log("deposited ", depositResponse)
                                         },
                                         err => {
                                             res.json(err)
@@ -50,6 +52,7 @@ const register = (app) => {
 
                             }else {
                                 res.json({message : "unkown account"})
+                                //console.log("unkown acc")
                             }
 
                         }, err => {
@@ -92,12 +95,21 @@ const register = (app) => {
 
     // parent : login
     app.post("/parent/login", (req, res) => {
-        // TODO: login student
+        // TODO: login parent
     })
 
     // parent: add child to parent
     app.post("/parent/child/add", (req, res) => {
         database.createChild(req.body, response => {
+            res.json(response)
+        }, err => {
+            res.json(err)
+        })
+    })
+
+    app.get("/parent/:phone/children", (req,res) => {
+        database.getChildren(req.params.phone, response => {
+            console.log(response)
             res.json(response)
         }, err => {
             res.json(err)

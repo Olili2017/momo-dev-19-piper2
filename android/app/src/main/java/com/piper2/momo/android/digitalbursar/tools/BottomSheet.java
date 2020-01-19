@@ -19,6 +19,11 @@ import androidx.annotation.Nullable;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.load.resource.gif.GifDrawable;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.piper2.momo.android.digitalbursar.R;
@@ -55,6 +60,7 @@ public class BottomSheet extends BottomSheetDialogFragment {
     private OnPasswordConfirmedListener onPasswordConfirmedListener;
     private OnConfirmingPasswordListener onConfirmingPasswordListener;
     public OnConfirmingPasswordFailureListener onConfirmingPasswordFailureListener;
+    public OnAllActionsCompletedListener onAllActionsCompletedListener;
     private TextView titleView;
     private TextView tagView;
 
@@ -161,40 +167,64 @@ public class BottomSheet extends BottomSheetDialogFragment {
                 if(GatewayService.canBeReached(getContext())) {
 //                    TODO: get user id from prefs
                     Call<Piner> getUser = GatewayService.getInstance().getApi().verifyPin(new User(1,password));
-                    if (onPasswordConfirmedListener != null){
+
+//                    Call<User> getUser = GatewayService.getInstance().getApi().getUser(435545);
+                    getUser.enqueue(new Callback<Piner>() {
+                        @Override
+                        public void onResponse(Call<Piner> call, Response<Piner> response) {
+//                            TODO: handle response from server
+                            assert response.body() != null;
+                            Log.d("verify",response.body().isVerified() ? "yes" : "not yet");
+                            if (response.body().isVerified()){
+                                if (onPasswordConfirmedListener != null){
                                     onPasswordConfirmedListener.onPasswordConfirmed();
                                 }
-//                    Call<User> getUser = GatewayService.getInstance().getApi().getUser(435545);
-//                    getUser.enqueue(new Callback<Piner>() {
-//                        @Override
-//                        public void onResponse(Call<Piner> call, Response<Piner> response) {
-////                            TODO: handle response from server
-//                            assert response.body() != null;
-//                            Log.d("verify",response.body().isVerified() ? "yes" : "not yet");
-//                            if (response.body().isVerified()){
-//                                if (onPasswordConfirmedListener != null){
-//                                    onPasswordConfirmedListener.onPasswordConfirmed();
-//                                }
-//                            } else {
-//                                if (onConfirmingPasswordFailureListener != null) {
-//                                    onConfirmingPasswordFailureListener.onConfirmingPasswordFailed("Incorrect pin entry");
-//                                }
-//                            }
-//                        }
-//
-//                        @Override
-//                        public void onFailure(Call<Piner> call, Throwable t) {
-//                            if (onConfirmingPasswordFailureListener  != null){
-//                                onConfirmingPasswordFailureListener.onConfirmingPasswordFailed("Service temporarily unavailable. Please try again later");
-//                            }
-//                        }
-//                    });
+                            } else {
+                                if (onConfirmingPasswordFailureListener != null) {
+                                    onConfirmingPasswordFailureListener.onConfirmingPasswordFailed("Incorrect pin entry");
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<Piner> call, Throwable t) {
+                            if (onConfirmingPasswordFailureListener  != null){
+                                onConfirmingPasswordFailureListener.onConfirmingPasswordFailed("Service temporarily unavailable. Please try again later");
+                            }
+                        }
+                    });
                 }else{
                     if (onConfirmingPasswordFailureListener  != null){
                         onConfirmingPasswordFailureListener.onConfirmingPasswordFailed("No internet! check your connection and try again.");
                     }
                 }
         });
+
+        setOnAllActionsCompletedListener(() -> {
+            currentStep.setText("Operation Successful!");
+            currentStepActionTag.setText("");
+            getTemplate().findViewById(R.id.pass_loading_spinner);
+            Glide.with(Objects.requireNonNull(getContext()))
+                    .asGif()
+                    .listener(new RequestListener<GifDrawable>() {
+                        @Override
+                        public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<GifDrawable> target, boolean isFirstResource) {
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onResourceReady(GifDrawable resource, Object model, Target<GifDrawable> target, DataSource dataSource, boolean isFirstResource) {
+                            if (resource instanceof GifDrawable) {
+                                ((GifDrawable) resource).setLoopCount(1);
+                            }
+                            return false;
+                        }
+                    })
+                    .load(R.drawable.success_tick)
+                    .into(loadingSpinner);
+
+        });
+
 
         setOnPasswordConfirmedListener(() -> {
             currentStep.setText("2/2");
@@ -274,6 +304,10 @@ public class BottomSheet extends BottomSheetDialogFragment {
         this.onSubmitListener = onSubmitListener;
     }
 
+    public void setOnAllActionsCompletedListener(OnAllActionsCompletedListener onAllActionsCompletedListener){
+        this.onAllActionsCompletedListener = onAllActionsCompletedListener;
+    }
+
     public void setOnPasswordConfirmedListener(OnPasswordConfirmedListener onPasswordConfirmedListener) {
         this.onPasswordConfirmedListener = onPasswordConfirmedListener;
     }
@@ -306,6 +340,11 @@ public class BottomSheet extends BottomSheetDialogFragment {
 
     public interface OnConfirmingPasswordFailureListener {
         void onConfirmingPasswordFailed(String message);
+    }
+
+
+    public interface OnAllActionsCompletedListener {
+        void onAllActionsCompleted();
     }
 
 

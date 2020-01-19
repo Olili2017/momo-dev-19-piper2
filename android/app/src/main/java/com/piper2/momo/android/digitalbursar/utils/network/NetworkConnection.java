@@ -4,13 +4,17 @@ import com.piper2.momo.android.digitalbursar.models.ConfirmSendMoneyDAO;
 import com.piper2.momo.android.digitalbursar.models.Piner;
 import com.piper2.momo.android.digitalbursar.models.SendMoneyDAO;
 import com.piper2.momo.android.digitalbursar.models.User;
+import com.piper2.momo.parent.models.Child;
+import com.piper2.momo.parent.models.ConfirmTransactionResponseDAO;
+import com.piper2.momo.parent.models.InitiateTransactionResponseDAO;
 
-import org.json.JSONObject;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 public interface NetworkConnection {
 
@@ -26,11 +30,13 @@ public interface NetworkConnection {
     Call<Piner> verifyPin(@Body User user);
 
     @POST("/parent/deposit/initiate")
-    Call<Object> sendMoney(@Body SendMoneyDAO sendMoneyDAO);
+    Call<InitiateTransactionResponseDAO> sendMoney(@Body SendMoneyDAO sendMoneyDAO);
 
+    @PUT("/parent/deposit/confirm/")
+    Call<ConfirmTransactionResponseDAO> sendMoney(@Body ConfirmSendMoneyDAO confirmSendMoneyDAO);
 
-    @POST("/parent/deposit/confirm/")
-    Call<Object> sendMoney(@Body ConfirmSendMoneyDAO confirmSendMoneyDAO);
+    @GET("/parent/{parentPhone}/children")
+    Call<List<Child>> getChildren(@Path("parentPhone") String phone);
 
 
 }

@@ -14,7 +14,9 @@ import com.piper2.momo.android.digitalbursar.R;
 import com.piper2.momo.android.digitalbursar.Transactions;
 import com.piper2.momo.android.digitalbursar.tools.RotateText;
 import com.piper2.momo.android.digitalbursar.utils.numbers.ConvertToCurrency;
+import com.piper2.momo.parent.actions.GetChildren;
 import com.piper2.momo.parent.adpters.ChildViewAdapter;
+import com.piper2.momo.parent.constants.Hard;
 import com.piper2.momo.parent.models.Child;
 import com.piper2.momo.parent.views.AddNewChildBottomSheet;
 import com.piper2.momo.parent.views.SendMoneyToNewChildBottomSheet;
@@ -65,19 +67,29 @@ public class MainActivity extends AppCompatActivity {
         setMyBalance(convertToCurrency.number(50000));
         setMyLastTransactionamount(convertToCurrency.number(20));
 
-        List<Child> cc = new ArrayList<>();
+        final List[] cc = new List[]{new ArrayList<>()};
 
-        cc.add(new Child("alex mukula", 123456789));
-        cc.add(new Child("Moses tumwebaze",987654321));
-        cc.add(new Child("ronald tumwebaze", 123876345));
-        cc.add(new Child("george tumwebaze",234346546));
-        cc.add(new Child("Mesile tumwebaze", 736098123));
-        cc.add(new Child("Givan tumwebaze",761295298));
+//        FIXME: change parent source on integration
+        new GetChildren(Hard.PARENT_PHONE)
+                .setOnChildrenListFetchCompleteLister((children) -> {
 
-        childViewAdapter = new ChildViewAdapter(this, cc);
-        childrenRecyclerView.setHasFixedSize(true);
-        childrenRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        childrenRecyclerView.setAdapter(childViewAdapter);
+                    cc[0] = children;
+                    childViewAdapter = new ChildViewAdapter(this, cc[0]);
+                    childrenRecyclerView.setHasFixedSize(true);
+                    childrenRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+                    childrenRecyclerView.setAdapter(childViewAdapter);
+                })
+                .setOnChildrenListFetchFailedLister(() ->{
+
+
+                    childViewAdapter = new ChildViewAdapter(this, cc[0]);
+                    childrenRecyclerView.setHasFixedSize(true);
+                    childrenRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+                    childrenRecyclerView.setAdapter(childViewAdapter);
+                })
+                .fetch();
+
+
 
         btnCreateChild.setOnClickListener(v -> {
             new AddNewChildBottomSheet("Create child account","Create a secret number for your child").showNow(getSupportFragmentManager(),"add_new_child");
