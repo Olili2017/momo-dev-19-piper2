@@ -79,6 +79,17 @@ const register = (app) => {
 
     })
 
+    // parent : get account balace
+    app.get("/parent/{phone}/balance", (req, res) => {
+        // momoClient.checkAccountBalance("disbursement", balance => {
+
+        // },
+        // error => {
+
+        // })
+
+    })
+
     // parent : view money requests
     app.get("/parent/requests", (req,res) => {
         // TODO: view money request from students

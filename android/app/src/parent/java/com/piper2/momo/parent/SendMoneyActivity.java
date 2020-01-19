@@ -22,6 +22,7 @@ import com.piper2.momo.android.digitalbursar.R;
 import com.piper2.momo.android.digitalbursar.Transactions;
 import com.piper2.momo.android.digitalbursar.tools.ClosableRelativeLayout;
 import com.piper2.momo.android.digitalbursar.tools.RotateText;
+import com.piper2.momo.android.digitalbursar.utils.numbers.ConvertToCurrency;
 import com.piper2.momo.parent.actions.GetChildren;
 import com.piper2.momo.parent.adpters.ChildViewAdapter;
 import com.piper2.momo.parent.constants.Hard;
@@ -38,6 +39,7 @@ public class SendMoneyActivity extends AppCompatActivity {
     private RecyclerView recentChildren;
     private ChildViewAdapter childViewAdapter;
     private RelativeLayout rlActivityContainer;
+
 
 
     boolean isClosing = false;
@@ -96,4 +98,5 @@ public class SendMoneyActivity extends AppCompatActivity {
         Intent intent = new Intent(context, SendMoneyActivity.class);
         context.startActivity(intent);
     }
+
 }

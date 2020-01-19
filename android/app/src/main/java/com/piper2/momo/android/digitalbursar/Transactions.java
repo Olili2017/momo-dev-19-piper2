@@ -9,8 +9,11 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.piper2.momo.android.digitalbursar.tools.RotateText;
+import com.piper2.momo.android.digitalbursar.utils.numbers.ConvertToCurrency;
 
 public class Transactions extends AppCompatActivity {
+
+    private String myBalance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,8 +26,25 @@ public class Transactions extends AppCompatActivity {
             actionBar.hide();
         }
         TextView appName = findViewById(R.id.appname);
+        TextView myBalance = findViewById(R.id.tv_my_balance);
         RotateText.build(appName, Transactions.this);
 
+
+        ConvertToCurrency convertToCurrency = new ConvertToCurrency();
+        setMyBalance(convertToCurrency.number(50000));
+
+        myBalance.setText(getMyBalance());
+
+
+    }
+
+
+    public String getMyBalance() {
+        return myBalance;
+    }
+
+    public void setMyBalance(String myBalance) {
+        this.myBalance = myBalance;
     }
 
     public static void startActivity(Context context){

@@ -162,6 +162,8 @@ public class BottomSheet extends BottomSheetDialogFragment {
         });
 
         setOnConfirmingPasswordListener(password -> {
+            btnSubmit.setEnabled(false);
+//            btnSubmit.setBackground(getContext().getResources().getDrawable(R.drawable.bg_pill));
             currentStep.setText("1/2");
             currentStepActionTag.setText("Verifying your pin");
                 if(GatewayService.canBeReached(getContext())) {
