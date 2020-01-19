@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.piper2.momo.android.digitalbursar.R;
 import com.piper2.momo.android.digitalbursar.Transactions;
 import com.piper2.momo.android.digitalbursar.tools.RotateText;
+import com.piper2.momo.android.digitalbursar.utils.numbers.ConvertToCurrency;
 import com.piper2.momo.parent.adpters.ChildViewAdapter;
 import com.piper2.momo.parent.models.Child;
 import com.piper2.momo.parent.views.AddNewChildBottomSheet;
@@ -60,6 +61,10 @@ public class MainActivity extends AppCompatActivity {
         myBalance = (TextView) findViewById(R.id.tv_my_balance);
         myLastTransactionAmount = (TextView) findViewById(R.id.tv_last_transction_amount);
 
+        ConvertToCurrency convertToCurrency = new ConvertToCurrency();
+        setMyBalance(convertToCurrency.number(50000));
+        setMyLastTransactionamount(convertToCurrency.number(20));
+
         List<Child> cc = new ArrayList<>();
 
         cc.add(new Child("alex mukula", 123456789));
@@ -83,7 +88,6 @@ public class MainActivity extends AppCompatActivity {
             overridePendingTransition(0,0);
         });
 
-
         btnViewAllRecipients.setOnClickListener(v -> {
             SendMoneyActivity.startActivity(this);
             overridePendingTransition(R.anim.slide_in_up,R.anim.fade_out);
@@ -95,10 +99,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
         btnSendToNew.setOnClickListener(v -> new SendMoneyToNewChildBottomSheet("Send money to;","").showNow(getSupportFragmentManager(),"btn_send_to_new"));
-//        btnSendMoney.setOnClickListener(v -> new SendMoneyBottomSheet("Send money","Easy way to keep the young ones in shape").showNow(getSupportFragmentManager(), "send_money"));
-//        btnSendMoney.setOnClickListener(v -> new BottomSheet("Send money","Easy way to keep the young ones in shape").showNow(getSupportFragmentManager(), "someTag"));
-
-//        sendMoneyBottomSheet = new SendMoneyBottomSheet();
 
 
     }

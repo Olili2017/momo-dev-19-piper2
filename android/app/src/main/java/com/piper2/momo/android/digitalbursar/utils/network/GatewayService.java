@@ -2,6 +2,7 @@ package com.piper2.momo.android.digitalbursar.utils.network;
 
 import android.content.Context;
 
+import com.piper2.momo.android.digitalbursar.models.ConfirmSendMoneyDAO;
 import com.piper2.momo.android.digitalbursar.models.Piner;
 import com.piper2.momo.android.digitalbursar.models.SendMoneyDAO;
 import com.piper2.momo.android.digitalbursar.models.User;
@@ -61,6 +62,11 @@ public class GatewayService implements NetworkConnection {
 
     @Override
     public Call<Object> sendMoney(SendMoneyDAO sendMoneyDAO) {
+        return null;
+    }
+
+    @Override
+    public Call<Object> sendMoney(ConfirmSendMoneyDAO confirmSendMoneyDAO) {
         return null;
     }
 

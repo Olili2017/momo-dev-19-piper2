@@ -1,5 +1,6 @@
 package com.piper2.momo.android.digitalbursar.utils.network;
 
+import com.piper2.momo.android.digitalbursar.models.ConfirmSendMoneyDAO;
 import com.piper2.momo.android.digitalbursar.models.Piner;
 import com.piper2.momo.android.digitalbursar.models.SendMoneyDAO;
 import com.piper2.momo.android.digitalbursar.models.User;
@@ -26,6 +27,10 @@ public interface NetworkConnection {
 
     @POST("/parent/deposit/initiate")
     Call<Object> sendMoney(@Body SendMoneyDAO sendMoneyDAO);
+
+
+    @POST("/parent/deposit/confirm/")
+    Call<Object> sendMoney(@Body ConfirmSendMoneyDAO confirmSendMoneyDAO);
 
 
 }
