@@ -5,4 +5,5 @@ package com.piper2.momo.parent.constants;
  */
 public interface Hard {
     String PARENT_PHONE = "0772649117";
+    String DEFAULT_PIN = "1234";
 }

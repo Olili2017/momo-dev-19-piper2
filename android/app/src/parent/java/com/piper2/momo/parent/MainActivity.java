@@ -25,6 +25,8 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    final List[] children = new List[]{new ArrayList<>()};
+
     private RecyclerView childrenRecyclerView;
     private ChildViewAdapter childViewAdapter;
     private LinearLayout btnGotoTransactions;
@@ -66,33 +68,15 @@ public class MainActivity extends AppCompatActivity {
         setMyBalance(convertToCurrency.number(50000));
         setMyLastTransactionamount(convertToCurrency.number(20));
 
-        final List[] cc = new List[]{new ArrayList<>()};
+        getChildren();
 
-//        FIXME: change parent source on integration
-        new GetChildren(Hard.PARENT_PHONE)
-                .setOnChildrenListFetchCompleteLister((children) -> {
-
-                    cc[0] = children;
-                    childViewAdapter = new ChildViewAdapter(this, cc[0]);
-                    childrenRecyclerView.setHasFixedSize(true);
-                    childrenRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-                    childrenRecyclerView.setAdapter(childViewAdapter);
+        btnCreateChild.setOnClickListener(v -> new AddNewChildBottomSheet("Create child account","Create a secret number for your child")
+                .setOnDismissingBottomSheet(shouldUpdateChildList -> {
+                    if (shouldUpdateChildList){
+                        getChildren();
+                    }
                 })
-                .setOnChildrenListFetchFailedLister(() ->{
-
-
-                    childViewAdapter = new ChildViewAdapter(this, cc[0]);
-                    childrenRecyclerView.setHasFixedSize(true);
-                    childrenRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-                    childrenRecyclerView.setAdapter(childViewAdapter);
-                })
-                .fetch();
-
-
-
-        btnCreateChild.setOnClickListener(v -> {
-            new AddNewChildBottomSheet("Create child account","Create a secret number for your child").showNow(getSupportFragmentManager(),"add_new_child");
-        });
+                .showNow(getSupportFragmentManager(),"add_new_child"));
 
         btnGotoTransactions.setOnClickListener(v -> {
             Transactions.startActivity(MainActivity.this);
@@ -112,5 +96,25 @@ public class MainActivity extends AppCompatActivity {
         btnSendToNew.setOnClickListener(v -> new SendMoneyToNewChildBottomSheet("Send money to;","").showNow(getSupportFragmentManager(),"btn_send_to_new"));
 
 
+    }
+
+    private void updateChildList(){
+        childViewAdapter = new ChildViewAdapter(this, children[0]);
+        childrenRecyclerView.setHasFixedSize(true);
+        childrenRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        childrenRecyclerView.setAdapter(childViewAdapter);
+    }
+
+    private void getChildren(){
+
+//        FIXME: change parent source on integration
+        new GetChildren(Hard.PARENT_PHONE)
+                .setOnChildrenListFetchCompleteLister((children) -> {
+
+                    this.children[0] = children;
+                    updateChildList();
+                })
+                .setOnChildrenListFetchFailedLister(this::updateChildList)
+                .fetch();
     }
 }

@@ -39,5 +39,8 @@ public interface NetworkConnection {
     @GET("/parent/{parentPhone}/children")
     Call<List<Child>> getChildren(@Path("parentPhone") String phone);
 
+    @POST("/parent/child/add")
+    Call<Child> createChild(@Body Child child);
+
 
 }
