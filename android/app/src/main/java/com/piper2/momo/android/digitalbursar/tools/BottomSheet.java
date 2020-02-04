@@ -2,9 +2,12 @@ package com.piper2.momo.android.digitalbursar.tools;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.graphics.Color;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -54,6 +57,7 @@ public class BottomSheet extends BottomSheetDialogFragment {
     private OnConfirmingPasswordListener onConfirmingPasswordListener;
     public OnConfirmingPasswordFailureListener onConfirmingPasswordFailureListener;
     public OnAllActionsCompletedListener onAllActionsCompletedListener;
+    public OnDismissingBottomSheet onDismissingBottomSheet;
     private TextView titleView;
     private TextView tagView;
 
@@ -198,7 +202,11 @@ public class BottomSheet extends BottomSheetDialogFragment {
         setOnAllActionsCompletedListener(() -> {
             currentStep.setText("Operation Successful!");
             currentStepActionTag.setText("");
-            getTemplate().findViewById(R.id.pass_loading_spinner);
+            btnSubmit.setVisibility(View.GONE);
+            btnCancel.setText("CLOSE");
+
+            ImageView spinner = getTemplate().findViewById(R.id.pass_loading_spinner);
+            spinner.setLayoutParams(new LinearLayout.LayoutParams(250, 250));
             Glide.with(Objects.requireNonNull(getContext()))
                     .asGif()
                     .listener(new RequestListener<GifDrawable>() {
@@ -216,7 +224,7 @@ public class BottomSheet extends BottomSheetDialogFragment {
                         }
                     })
                     .load(R.drawable.success_tick)
-                    .into(loadingSpinner);
+                    .into(spinner);
 
         });
 
@@ -287,6 +295,11 @@ public class BottomSheet extends BottomSheetDialogFragment {
 
     }
 
+    public BottomSheet setOnDismissingBottomSheet(OnDismissingBottomSheet onDismissingBottomSheet) {
+        this.onDismissingBottomSheet = onDismissingBottomSheet;
+        return this;
+    }
+
     public void doFinalThing(){
 //        intentionally left empty for override usage.. // please don't remove.
     }
@@ -340,6 +353,11 @@ public class BottomSheet extends BottomSheetDialogFragment {
 
     public interface OnAllActionsCompletedListener {
         void onAllActionsCompleted();
+    }
+
+
+    public interface OnDismissingBottomSheet {
+        void onDismissingSheet(boolean update);
     }
 
 

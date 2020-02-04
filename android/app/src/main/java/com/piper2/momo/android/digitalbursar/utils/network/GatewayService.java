@@ -80,6 +80,11 @@ public class GatewayService implements NetworkConnection {
         return null;
     }
 
+    @Override
+    public Call<Child> createChild(Child child) {
+        return null;
+    }
+
     //    start properties
 
     /**

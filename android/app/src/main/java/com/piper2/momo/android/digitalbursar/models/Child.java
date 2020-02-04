@@ -1,10 +1,13 @@
 package com.piper2.momo.android.digitalbursar.models;
 
+import androidx.annotation.NonNull;
+
 public class Child {
 
     private String name;
     private String firstName;
     private String image;
+    private String parent, pin;
     private long accountNumber;
 
     public Child() {
@@ -51,5 +54,27 @@ public class Child {
 
     public void setAccountNumber(long accountNumber) {
         this.accountNumber = accountNumber;
+    }
+
+    public String getParent() {
+        return parent;
+    }
+
+    public void setParent(String parent) {
+        this.parent = parent;
+    }
+
+    public String getPin() {
+        return pin;
+    }
+
+    public void setPin(String pin) {
+        this.pin = pin;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "Name: " + this.name + "\nParent: " + this.parent;
     }
 }

@@ -1,6 +1,7 @@
 package com.piper2.momo.parent.adpters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,10 +51,10 @@ public class ChildViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 
-        if (children == null && getItemCount() == 1){
+        if (children == null || children.size() == 0){
             buildNoChildViewHolder((NoChildViewHolder) holder);
         } else {
-            buildChildViewHolder((ChildViewHolder) holder, this.children.get(position));
+                buildChildViewHolder((ChildViewHolder) holder, this.children.get(position));
         }
     }
 
@@ -91,6 +92,7 @@ public class ChildViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     @Override
     public int getItemCount() {
+
         if (children == null){
             return 1;
         }
@@ -99,7 +101,7 @@ public class ChildViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     @Override
     public int getItemViewType(int position) {
-        if (children == null && getItemCount() == 1){
+        if (children == null || children.size() == 0){
             return ViewType.EMPTY_LIST_VIEW;
         }else {
             return (!isWideView) ? ViewType.HORIZONTAL_LIST_VIEW : ViewType.VERTICAL_LIST_VIEW;
